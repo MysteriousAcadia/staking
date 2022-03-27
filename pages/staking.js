@@ -24,10 +24,10 @@ import PropTypes from 'prop-types';
 import CloseIcon from '@material-ui/icons/Close';
 import AddIcon from '@material-ui/icons/Add';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
-import UnlocksModal from '../components/Staking/UnlocksModal'
+import UnlocksModal from '../components/Staking/UnlocksModal';
 import { Provider as MulticallProvider, Contract as MulticallContract } from "ethers-multicall";
 import axios from 'axios'
-
+const ethers = require("ethers")
 const useStyles = makeStyles((theme) => ({
   leftSide: {
     position: "sticky",
@@ -1205,7 +1205,7 @@ const Staking = () => {
     lockStakedIds,
     lockStakedRewards
   } = state;
-
+  console.log(address);
   const connectWallet = async () => {
     const providerOptions = {
       metamask: {
@@ -1292,7 +1292,7 @@ const Staking = () => {
     const _signer = provider1.getSigner();
 
     const nftStakingContract = new ethers.Contract(nftContractAddress, nftContractABI, _signer);
-
+    console.log(await _signer?.getAddress())
     dispatch({
       type: 'SET_NFT_CONTRACT',
       nftContract: nftStakingContract
@@ -2032,8 +2032,21 @@ const Staking = () => {
       const { signature, address, types, voucher, finalPrice } = webRequest.data;
       console.log(voucher)
       console.log(filtered, [voucher.price.toString(), voucher.time.toString(), signature], '*******')
-      const transaction = await nftContract.unstakeTokens(filtered, [voucher.price.toString(), voucher.time.toString(), signature]);
-      const finishTxn = await transaction.wait();
+      console.log(filtered.map(e => e.toString()), [voucher.price.toString(), voucher.time.toString(), signature]);
+      const accounts = await ethereum.request({ method: 'eth_accounts' });
+      console.log(accounts);
+      await window.ethereum.request({
+        method: "wallet_switchEthereumChain",
+        params: [{ chainId: `0x${(1666700000).toString(16)}` }],
+      });
+      const _provider1 = new ethers.providers.Web3Provider(web3.currentProvider);
+      const _signer = await _provider1.getSigner();
+      let add = await _signer.getAddress()
+      let _nftContract = new web3.eth.Contract(nftContractABI, nftContractAddress)
+      console.log(_nftContract.address)
+      const transaction = await _nftContract.methods?.unstakeTokens(filtered.map(e => e.toString()), [voucher.price, voucher.time, signature]).send({ from: add });
+      // const finishTxn = await transaction.wait();
+      // conso
       console.log(finishTxn);
       toast.success(`${filtered.length} token staked successfully.`)
       // getNFTBalance();

@@ -1629,64 +1629,53 @@ export const nftABI = [
     }
 ]
 
-export const nftContractAddress = '0x3AD682C619e194243B7dbBdB7661FAF88d7BEE24'
+export const nftContractAddress = '0xfe5194ff2d8fb9728e60d9b59991fe1dfe300ca6'
 
 export const nftContractABI = [
     {
+        "stateMutability": "nonpayable",
         "type": "constructor",
         "inputs": [
             {
-                "type": "address",
+                "internalType": "address",
                 "name": "_nft",
-                "internalType": "address"
+                "type": "address"
             },
             {
-                "name": "_token",
-                "type": "address",
-                "internalType": "address"
-            }
-        ],
-        "stateMutability": "nonpayable"
-    },
-    {
-        "type": "event",
-        "inputs": [
-            {
-                "name": "previousOwner",
                 "type": "address",
                 "internalType": "address",
-                "indexed": true
-            },
+                "name": "_token"
+            }
+        ]
+    },
+    {
+        "inputs": [
             {
-                "name": "newOwner",
                 "type": "address",
                 "indexed": true,
-                "internalType": "address"
+                "internalType": "address",
+                "name": "previousOwner"
+            },
+            {
+                "type": "address",
+                "internalType": "address",
+                "name": "newOwner",
+                "indexed": true
             }
         ],
         "name": "OwnershipTransferred",
-        "anonymous": false
-    },
-    {
-        "type": "function",
-        "outputs": [
-            {
-                "type": "bool",
-                "name": "",
-                "internalType": "bool"
-            }
-        ],
-        "name": "Paused",
-        "stateMutability": "view",
-        "inputs": []
+        "anonymous": false,
+        "type": "event"
     },
     {
         "stateMutability": "view",
-        "type": "function",
         "name": "getSigner",
+        "type": "function",
         "inputs": [
             {
                 "name": "result",
+                "internalType": "struct PriceSigner.Price",
+                "type": "tuple",
                 "components": [
                     {
                         "name": "price",
@@ -1694,159 +1683,138 @@ export const nftContractABI = [
                         "internalType": "uint256"
                     },
                     {
-                        "internalType": "uint256",
                         "type": "uint256",
-                        "name": "time"
+                        "name": "time",
+                        "internalType": "uint256"
                     },
                     {
                         "type": "bytes",
-                        "name": "signature",
-                        "internalType": "bytes"
+                        "internalType": "bytes",
+                        "name": "signature"
                     }
-                ],
-                "type": "tuple",
-                "internalType": "struct PriceSigner.Price"
+                ]
             }
         ],
         "outputs": [
             {
-                "name": "",
                 "type": "address",
+                "name": "",
                 "internalType": "address"
             }
         ]
     },
     {
-        "outputs": [
-            {
-                "type": "address",
-                "internalType": "address",
-                "name": ""
-            }
-        ],
         "name": "owner",
-        "stateMutability": "view",
-        "inputs": [],
-        "type": "function"
-    },
-    {
-        "name": "renounceOwnership",
-        "stateMutability": "nonpayable",
-        "outputs": [],
-        "inputs": [],
-        "type": "function"
-    },
-    {
-        "stateMutability": "view",
-        "name": "stakedTokens",
-        "type": "function",
         "outputs": [
             {
-                "type": "address",
-                "internalType": "address",
-                "name": "owner"
-            },
-            {
-                "internalType": "uint256",
-                "type": "uint256",
-                "name": "stakeTime"
-            },
-            {
-                "type": "uint256",
-                "internalType": "uint256",
-                "name": "position"
-            }
-        ],
-        "inputs": [
-            {
-                "internalType": "uint256",
                 "name": "",
-                "type": "uint256"
-            }
-        ]
-    },
-    {
-        "outputs": [
-            {
-                "type": "uint256",
-                "name": "",
-                "internalType": "uint256"
-            }
-        ],
-        "stateMutability": "view",
-        "name": "timeBreak",
-        "type": "function",
-        "inputs": [
-            {
-                "internalType": "uint256",
-                "name": "",
-                "type": "uint256"
-            }
-        ]
-    },
-    {
-        "name": "transferOwnership",
-        "type": "function",
-        "inputs": [
-            {
-                "name": "newOwner",
                 "internalType": "address",
                 "type": "address"
             }
         ],
+        "inputs": [],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
         "stateMutability": "nonpayable",
+        "inputs": [],
+        "name": "renounceOwnership",
+        "type": "function",
+        "outputs": []
+    },
+    {
+        "type": "function",
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "type": "uint256",
+                "name": ""
+            }
+        ],
+        "stateMutability": "view",
+        "outputs": [
+            {
+                "name": "owner",
+                "internalType": "address",
+                "type": "address"
+            },
+            {
+                "internalType": "uint256",
+                "name": "stakeTime",
+                "type": "uint256"
+            },
+            {
+                "name": "position",
+                "type": "uint256",
+                "internalType": "uint256"
+            }
+        ],
+        "name": "stakedTokens"
+    },
+    {
+        "name": "transferOwnership",
+        "stateMutability": "nonpayable",
+        "inputs": [
+            {
+                "name": "newOwner",
+                "type": "address",
+                "internalType": "address"
+            }
+        ],
+        "type": "function",
         "outputs": []
     },
     {
         "name": "stakeNFT",
-        "type": "function",
-        "outputs": [],
-        "stateMutability": "nonpayable",
         "inputs": [
             {
                 "name": "tokenIds",
                 "type": "uint256[]",
                 "internalType": "uint256[]"
             }
-        ]
-    },
-    {
-        "inputs": [
-            {
-                "internalType": "uint256[]",
-                "name": "tokenIds",
-                "type": "uint256[]"
-            },
-            {
-                "components": [
-                    {
-                        "internalType": "uint256",
-                        "name": "price",
-                        "type": "uint256"
-                    },
-                    {
-                        "name": "time",
-                        "type": "uint256",
-                        "internalType": "uint256"
-                    },
-                    {
-                        "type": "bytes",
-                        "name": "signature",
-                        "internalType": "bytes"
-                    }
-                ],
-                "internalType": "struct PriceSigner.Price",
-                "type": "tuple",
-                "name": "price"
-            }
         ],
-        "name": "claimRewards",
-        "stateMutability": "nonpayable",
         "type": "function",
+        "stateMutability": "nonpayable",
         "outputs": []
     },
     {
         "type": "function",
+        "name": "claimRewards",
+        "outputs": [],
+        "inputs": [
+            {
+                "type": "uint256[]",
+                "internalType": "uint256[]",
+                "name": "tokenIds"
+            },
+            {
+                "components": [
+                    {
+                        "name": "price",
+                        "type": "uint256",
+                        "internalType": "uint256"
+                    },
+                    {
+                        "type": "uint256",
+                        "internalType": "uint256",
+                        "name": "time"
+                    },
+                    {
+                        "internalType": "bytes",
+                        "name": "signature",
+                        "type": "bytes"
+                    }
+                ],
+                "name": "price",
+                "type": "tuple",
+                "internalType": "struct PriceSigner.Price"
+            }
+        ],
+        "stateMutability": "nonpayable"
+    },
+    {
+        "stateMutability": "view",
         "outputs": [
             {
                 "name": "",
@@ -1858,17 +1826,17 @@ export const nftContractABI = [
         "inputs": [
             {
                 "internalType": "uint256",
-                "type": "uint256",
-                "name": "tokenId"
+                "name": "tokenId",
+                "type": "uint256"
             }
         ],
-        "stateMutability": "view"
+        "type": "function"
     },
     {
-        "outputs": [],
-        "type": "function",
         "name": "unstakeTokens",
         "stateMutability": "nonpayable",
+        "type": "function",
+        "outputs": [],
         "inputs": [
             {
                 "internalType": "uint256[]",
@@ -1876,52 +1844,52 @@ export const nftContractABI = [
                 "name": "tokenIds"
             },
             {
+                "internalType": "struct PriceSigner.Price",
                 "name": "price",
                 "type": "tuple",
-                "internalType": "struct PriceSigner.Price",
                 "components": [
                     {
                         "name": "price",
-                        "internalType": "uint256",
-                        "type": "uint256"
+                        "type": "uint256",
+                        "internalType": "uint256"
                     },
                     {
+                        "internalType": "uint256",
                         "name": "time",
-                        "internalType": "uint256",
                         "type": "uint256"
                     },
                     {
+                        "name": "signature",
                         "internalType": "bytes",
-                        "type": "bytes",
-                        "name": "signature"
+                        "type": "bytes"
                     }
                 ]
             }
         ]
     },
     {
-        "stateMutability": "view",
-        "name": "getUserStaked",
-        "outputs": [
-            {
-                "name": "",
-                "type": "uint256[]",
-                "internalType": "uint256[]"
-            }
-        ],
-        "type": "function",
         "inputs": [
             {
                 "name": "_user",
-                "internalType": "address",
-                "type": "address"
+                "type": "address",
+                "internalType": "address"
             }
-        ]
+        ],
+        "name": "getUserStaked",
+        "type": "function",
+        "outputs": [
+            {
+                "type": "uint256[]",
+                "name": "",
+                "internalType": "uint256[]"
+            }
+        ],
+        "stateMutability": "view"
     },
     {
         "name": "setNFT",
+        "stateMutability": "nonpayable",
         "type": "function",
-        "outputs": [],
         "inputs": [
             {
                 "name": "_nft",
@@ -1929,32 +1897,32 @@ export const nftContractABI = [
                 "internalType": "address"
             }
         ],
-        "stateMutability": "nonpayable"
+        "outputs": []
     },
     {
+        "stateMutability": "nonpayable",
         "inputs": [
             {
-                "name": "_token",
                 "type": "address",
+                "name": "_token",
                 "internalType": "address"
             }
         ],
-        "name": "setToken",
         "type": "function",
-        "stateMutability": "nonpayable",
-        "outputs": []
+        "outputs": [],
+        "name": "setToken"
     },
     {
-        "name": "setSigner",
-        "stateMutability": "nonpayable",
-        "type": "function",
+        "outputs": [],
         "inputs": [
             {
-                "name": "_signer",
                 "internalType": "address",
+                "name": "_signer",
                 "type": "address"
             }
         ],
-        "outputs": []
+        "name": "setSigner",
+        "stateMutability": "nonpayable",
+        "type": "function"
     }
 ]
