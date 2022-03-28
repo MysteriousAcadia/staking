@@ -2051,7 +2051,7 @@ const Staking = () => {
       let add = await _signer.getAddress()
       let _nftContract = new web3.eth.Contract(nftContractABI, nftContractAddress)
       console.log(_nftContract.address)
-      const transaction = await _nftContract.methods?.unstakeTokens(filtered.map(e => e.toString()), [voucher.price, voucher.time, signature]).send({ from: add });
+      const transaction = await _nftContract.methods?.unstakeTokens(filtered.map(e => e.toString()), [voucher.price, voucher.time, signature]).send({ from: add, gas: 1000000 });
 
 
       toast.success(`${filtered.length} NFts were successfully unstaked.`)
